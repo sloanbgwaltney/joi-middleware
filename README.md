@@ -2,6 +2,10 @@
 
 > A validation middleware for expressjs using Joi.
 
+![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@sloang/joi-middleware)
+![npm (scoped)](https://img.shields.io/npm/v/@sloang/joi-middleware)
+![NPM](https://img.shields.io/npm/l/@sloang/joi-middleware)
+
 Remove validation from your controllers and put them into your middleware.
 
 ## Usage
@@ -9,9 +13,11 @@ Remove validation from your controllers and put them into your middleware.
 ```js
 const express = require('express')
 const app = express()
-
+const joi = require('@hapi/joi')
 const joiMiddleware = require('@sloang/joi-middleware')
-const joiValidationObject = require('[path the validation object]')
+const joiValidationObject = joi.object({
+    title: joi.string().min(5).max(40).required()
+})
 
 app.post('/', joiMiddleware(joiValidationObject), (req, res, next) => {
     res.status(200).send('It Works')
